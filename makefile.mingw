@@ -1,0 +1,142 @@
+OPT_FLAGS = -O3 -ffast-math 
+CXXFLAGS = -Wall -fexceptions $(OPT_FLAGS) -DBYTE_ORDER=LITTLE_ENDIAN -DNEED_BCOPY -DLIBXML_STATIC -DMALLOC_H_NEEDED
+CFLAGS = -Wall $(OPT_FLAGS)
+LDFLAGS = $(OPT_FLAGS)
+CC = gcc
+CXX = g++
+
+LIBS = lib/libode_wis.a -L$(HOME)/Unix/lib -lxml2 -lm -lwsock32
+INC_DIRS = -Iode/include -I$(HOME)/Unix/include -I$(HOME)/Unix/include/libxml2
+
+# vpath %.cpp src
+# vpath %.c src 
+
+GAITSYMSRC = \
+Body.cpp                DataTarget.cpp          GLUtils.cpp             NamedObject.cpp         TIFFWrite.cpp\
+CappedCylinderGeom.cpp  Geom.cpp                ObjectiveMain.cpp       ThreePointStrap.cpp     FixedJoint.cpp\
+CyclicDriver.cpp        Environment.cpp         HingeJoint.cpp          PlaneGeom.cpp           TwoPointStrap.cpp\
+CylinderWrapStrap.cpp   Face.cpp                Joint.cpp               Simulation.cpp          UGMMuscle.cpp\
+DampedSpringMuscle.cpp  FacetedObject.cpp       MAMuscle.cpp            StepDriver.cpp          SphereGeom.cpp\
+DataFile.cpp            GLUIRoutines.cpp        Muscle.cpp              Strap.cpp               FacetedSphere.cpp\
+FacetedConicSegment.cpp Contact.cpp             MAMuscleExtended.cpp    FloatingHingeJoint.cpp  ErrorHandler.cpp\
+MAMuscleComplete.cpp    UDP.cpp                 Util.cpp                FacetedPolyline.cpp     NPointStrap.cpp\
+fec.cpp                 TCP.cpp                 BallJoint.cpp           MAMuscleExtendedDamped.cpp StrokeFont.cpp\
+DataTargetScalar.cpp    DataTargetQuaternion.cpp DataTargetVector.cpp   Driver.cpp              Marker.cpp\
+TrimeshGeom.cpp         RayGeom.cpp
+
+GAITSYMOBJ = $(addsuffix .o, $(basename $(GAITSYMSRC) ) )
+ODECPPOBJ = $(addsuffix .o, $(basename $(ODECPPSRC) ) )
+ODECOBJ = $(addsuffix .o, $(basename $(ODECSRC) ) )
+
+BINARIES = bin/gaitsym bin/gaitsym_opengl bin/gaitsym_udp bin/gaitsym_opengl_udp bin/gaitsym_tcp bin/gaitsym_opengl_tcp
+
+BINARIES_NO_OPENGL = bin/gaitsym bin/gaitsym_udp bin/gaitsym_tcp
+
+all: directories binaries_no_opengl
+
+no_opengl: directories binaries_no_opengl
+
+directories: bin obj 
+
+binaries: $(BINARIES)
+
+binaries_no_opengl: $(BINARIES_NO_OPENGL)
+
+obj: 
+	-mkdir obj
+	-mkdir obj/no_opengl
+	-mkdir obj/opengl
+	-mkdir obj/no_opengl_udp
+	-mkdir obj/opengl_udp
+	-mkdir obj/no_opengl_tcp
+	-mkdir obj/opengl_tcp
+	-mkdir obj/ode_cpp
+	-mkdir obj/ode_c
+
+bin:
+	-mkdir bin
+	 
+obj/no_opengl/%.o : src/%.cpp
+	$(CXX) $(CXXFLAGS) $(INC_DIRS)  -c $< -o $@
+
+bin/gaitsym: $(addprefix obj/no_opengl/, $(GAITSYMOBJ) ) $(addprefix obj/ode_cpp/, $(ODECPPOBJ) ) $(addprefix obj/ode_c/, $(ODECOBJ) )
+	$(CXX) $(LDFLAGS) -o $@ $^ $(LIBS)
+
+obj/opengl/%.o : src/%.cpp
+	$(CXX) -DUSE_OPENGL $(CXXFLAGS) $(INC_DIRS) $(OPENGL_INC)  -c $< -o $@
+
+bin/gaitsym_opengl: $(addprefix obj/opengl/, $(GAITSYMOBJ) ) $(addprefix obj/ode_cpp/, $(ODECPPOBJ) ) $(addprefix obj/ode_c/, $(ODECOBJ) )
+	$(CXX) $(LDFLAGS) -o $@ $^ $(OPENGL_LIBS) $(LIBS) 
+
+obj/no_opengl_socket/%.o : src/%.cpp
+	$(CXX) -DUSE_SOCKETS $(CXXFLAGS) $(INC_DIRS)  -c $< -o $@
+
+bin/gaitsym_socket: $(addprefix obj/no_opengl_socket/, $(GAITSYMOBJ) ) $(addprefix obj/ode_cpp/, $(ODECPPOBJ) ) $(addprefix obj/ode_c/, $(ODECOBJ) )
+	$(CXX) $(LDFLAGS) -o $@ $^ $(SOCKET_LIBS) $(LIBS)
+
+obj/opengl_socket/%.o : src/%.cpp
+	$(CXX) -DUSE_OPENGL -DUSE_SOCKETS $(CXXFLAGS) $(INC_DIRS) $(OPENGL_INC)  -c $< -o $@
+
+bin/gaitsym_opengl_socket: $(addprefix obj/opengl_socket/, $(GAITSYMOBJ) ) $(addprefix obj/ode_cpp/, $(ODECPPOBJ) ) $(addprefix obj/ode_c/, $(ODECOBJ) )
+	$(CXX) $(LDFLAGS) -o $@ $^ $(SOCKET_LIBS) $(OPENGL_LIBS) $(LIBS) 
+
+obj/no_opengl_udp/%.o : src/%.cpp
+	$(CXX) -DUSE_UDP $(CXXFLAGS) $(INC_DIRS)  -c $< -o $@
+
+bin/gaitsym_udp: $(addprefix obj/no_opengl_udp/, $(GAITSYMOBJ) ) $(addprefix obj/ode_cpp/, $(ODECPPOBJ) ) $(addprefix obj/ode_c/, $(ODECOBJ) )
+	$(CXX) $(LDFLAGS) -o $@ $^ $(UDP_LIBS) $(LIBS)
+
+obj/opengl_udp/%.o : src/%.cpp
+	$(CXX) -DUSE_OPENGL -DUSE_UDP $(CXXFLAGS) $(INC_DIRS) $(OPENGL_INC)  -c $< -o $@
+
+bin/gaitsym_opengl_udp: $(addprefix obj/opengl_udp/, $(GAITSYMOBJ) ) $(addprefix obj/ode_cpp/, $(ODECPPOBJ) ) $(addprefix obj/ode_c/, $(ODECOBJ) )
+	$(CXX) $(LDFLAGS) -o $@ $^ $(UDP_LIBS) $(OPENGL_LIBS) $(LIBS) 
+
+obj/no_opengl_tcp/%.o : src/%.cpp
+	$(CXX) -DUSE_TCP $(CXXFLAGS) $(INC_DIRS)  -c $< -o $@
+
+bin/gaitsym_tcp: $(addprefix obj/no_opengl_tcp/, $(GAITSYMOBJ) ) $(addprefix obj/ode_cpp/, $(ODECPPOBJ) ) $(addprefix obj/ode_c/, $(ODECOBJ) )
+	$(CXX) $(LDFLAGS) -o $@ $^ $(TCP_LIBS) $(LIBS)
+
+obj/opengl_tcp/%.o : src/%.cpp
+	$(CXX) -DUSE_OPENGL -DUSE_TCP $(CXXFLAGS) $(INC_DIRS) $(OPENGL_INC)  -c $< -o $@
+
+bin/gaitsym_opengl_tcp: $(addprefix obj/opengl_tcp/, $(GAITSYMOBJ) ) $(addprefix obj/ode_cpp/, $(ODECPPOBJ) ) $(addprefix obj/ode_c/, $(ODECOBJ) )
+	$(CXX) $(LDFLAGS) -o $@ $^ $(TCP_LIBS) $(OPENGL_LIBS) $(LIBS) 
+
+
+clean:
+	rm -rf obj bin
+	rm -f *~ *.bak *.bck *.tmp *.o 
+	rm -f ode/include/config.h ode/src/*~ ode/src/*.bak ode/src/*.bck ode/src/*.tmp ode/src/*.o 
+	rm -rf distribution
+
+superclean:
+	rm -rf obj bin
+	rm -f *~ *.bak *.bck *.tmp *.o 
+	rm -rf project_builder/build project_builder/GaitSym.pbproj/*.pbxuser
+	rm -rf distribution
+	find . -name '.DS_Store' -exec rm -f {} \;
+	find . -name '.gdb_history' -exec rm -f {} \;
+	find . -name '.#*' -exec rm -f {} \;
+
+distribution: distribution_dirs ode_distribution gaitsym_distribution
+
+distribution_dirs:
+	rm -rf distribution
+	-mkdir distribution
+	-mkdir distribution/ode
+	-mkdir distribution/ode/src
+	-mkdir distribution/ode/include
+	-mkdir distribution/ode/include/ode
+	-mkdir distribution/src
+
+ode_distribution:
+	cp ode/src/*.cpp distribution/ode/src/
+	cp ode/src/*.h distribution/ode/src/
+	cp ode/include/ode/*.h distribution/ode/include/ode/
+
+gaitsym_distribution: 
+	cp src/*.cpp distribution/src/
+	rm distribution/src/MAMuscleComplete.cpp
+	

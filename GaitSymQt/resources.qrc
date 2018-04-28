@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/new/prefix1" >
+        <file>images/media-playback-pause.png</file>
+        <file>images/media-seek-forward.png</file>
+        <file>images/media-step-forward.png</file>
+        <file>images/camera-photo.png</file>
+        <file>ViewControlWidget Images/SideBySide.png</file>
+        <file>ViewControlWidget Images/Blob.png</file>
+        <file>images/media-playback-stop.png</file>
+    </qresource>
+</RCC>

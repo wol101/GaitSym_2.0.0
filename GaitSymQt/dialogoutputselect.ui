@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DialogOutputSelect</class>
+ <widget class="QDialog" name="DialogOutputSelect">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>972</width>
+    <height>622</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Output Control</string>
+  </property>
+  <widget class="QDialogButtonBox" name="buttonBox">
+   <property name="geometry">
+    <rect>
+     <x>620</x>
+     <y>590</y>
+     <width>341</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="standardButtons">
+    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+   </property>
+  </widget>
+  <widget class="QListWidget" name="listWidgetGeom">
+   <property name="geometry">
+    <rect>
+     <x>330</x>
+     <y>30</y>
+     <width>155</width>
+     <height>551</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="contextMenuPolicy">
+    <enum>Qt::CustomContextMenu</enum>
+   </property>
+   <property name="toolTip">
+    <string>Use this list to control which elements are displayed</string>
+   </property>
+   <property name="statusTip">
+    <string>Geom List</string>
+   </property>
+   <property name="selectionMode">
+    <enum>QAbstractItemView::SingleSelection</enum>
+   </property>
+  </widget>
+  <widget class="QListWidget" name="listWidgetMuscle">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>30</y>
+     <width>155</width>
+     <height>551</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="contextMenuPolicy">
+    <enum>Qt::CustomContextMenu</enum>
+   </property>
+   <property name="toolTip">
+    <string>Use this list to control which elements are displayed</string>
+   </property>
+   <property name="statusTip">
+    <string>Muscle List</string>
+   </property>
+   <property name="selectionMode">
+    <enum>QAbstractItemView::SingleSelection</enum>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>151</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>BODY</string>
+   </property>
+  </widget>
+  <widget class="QListWidget" name="listWidgetJoint">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>30</y>
+     <width>155</width>
+     <height>551</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="contextMenuPolicy">
+    <enum>Qt::CustomContextMenu</enum>
+   </property>
+   <property name="toolTip">
+    <string>Use this list to control which elements are displayed</string>
+   </property>
+   <property name="statusTip">
+    <string>Joint List</string>
+   </property>
+   <property name="selectionMode">
+    <enum>QAbstractItemView::SingleSelection</enum>
+   </property>
+  </widget>
+  <widget class="QListWidget" name="listWidgetBody">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>30</y>
+     <width>155</width>
+     <height>551</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="contextMenuPolicy">
+    <enum>Qt::CustomContextMenu</enum>
+   </property>
+   <property name="toolTip">
+    <string>Use this list to control which elements are displayed</string>
+   </property>
+   <property name="statusTip">
+    <string>Body List</string>
+   </property>
+   <property name="selectionMode">
+    <enum>QAbstractItemView::SingleSelection</enum>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>330</x>
+     <y>10</y>
+     <width>151</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>GEOM</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>490</x>
+     <y>10</y>
+     <width>151</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>MUSCLE</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>10</y>
+     <width>151</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>JOINT</string>
+   </property>
+  </widget>
+  <widget class="QListWidget" name="listWidgetDriver">
+   <property name="geometry">
+    <rect>
+     <x>650</x>
+     <y>30</y>
+     <width>155</width>
+     <height>551</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="contextMenuPolicy">
+    <enum>Qt::CustomContextMenu</enum>
+   </property>
+   <property name="toolTip">
+    <string>Use this list to control which elements are displayed</string>
+   </property>
+   <property name="statusTip">
+    <string>Muscle List</string>
+   </property>
+   <property name="selectionMode">
+    <enum>QAbstractItemView::SingleSelection</enum>
+   </property>
+  </widget>
+  <widget class="QListWidget" name="listWidgetDataTarget">
+   <property name="geometry">
+    <rect>
+     <x>810</x>
+     <y>30</y>
+     <width>155</width>
+     <height>551</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="contextMenuPolicy">
+    <enum>Qt::CustomContextMenu</enum>
+   </property>
+   <property name="toolTip">
+    <string>Use this list to control which elements are displayed</string>
+   </property>
+   <property name="statusTip">
+    <string>Muscle List</string>
+   </property>
+   <property name="selectionMode">
+    <enum>QAbstractItemView::SingleSelection</enum>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>650</x>
+     <y>10</y>
+     <width>151</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>DRIVER</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_6">
+   <property name="geometry">
+    <rect>
+     <x>810</x>
+     <y>10</y>
+     <width>151</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>DATATARGET</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>DialogOutputSelect</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>838</x>
+     <y>604</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>DialogOutputSelect</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>906</x>
+     <y>610</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>listWidgetBody</sender>
+   <signal>customContextMenuRequested(QPoint)</signal>
+   <receiver>DialogOutputSelect</receiver>
+   <slot>menuRequestBody(QPoint)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>90</x>
+     <y>389</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>65</x>
+     <y>599</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>listWidgetJoint</sender>
+   <signal>customContextMenuRequested(QPoint)</signal>
+   <receiver>DialogOutputSelect</receiver>
+   <slot>menuRequestJoint(QPoint)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>237</x>
+     <y>509</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>237</x>
+     <y>598</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>listWidgetGeom</sender>
+   <signal>customContextMenuRequested(QPoint)</signal>
+   <receiver>DialogOutputSelect</receiver>
+   <slot>menuRequestGeom(QPoint)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>392</x>
+     <y>464</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>396</x>
+     <y>598</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>listWidgetMuscle</sender>
+   <signal>customContextMenuRequested(QPoint)</signal>
+   <receiver>DialogOutputSelect</receiver>
+   <slot>menuRequestMuscle(QPoint)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>567</x>
+     <y>396</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>585</x>
+     <y>601</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>listWidgetDriver</sender>
+   <signal>customContextMenuRequested(QPoint)</signal>
+   <receiver>DialogOutputSelect</receiver>
+   <slot>menuRequestDriver(QPoint)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>707</x>
+     <y>425</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>336</x>
+     <y>597</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>listWidgetDataTarget</sender>
+   <signal>customContextMenuRequested(QPoint)</signal>
+   <receiver>DialogOutputSelect</receiver>
+   <slot>menuRequestDataTarget(QPoint)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>864</x>
+     <y>248</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>807</x>
+     <y>584</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>menuRequestBody(QPoint)</slot>
+  <slot>menuRequestJoint(QPoint)</slot>
+  <slot>menuRequestGeom(QPoint)</slot>
+  <slot>menuRequestMuscle(QPoint)</slot>
+  <slot>menuRequestDriver(QPoint)</slot>
+  <slot>menuRequestDataTarget(QPoint)</slot>
+ </slots>
+</ui>
